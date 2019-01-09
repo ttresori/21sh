@@ -1,0 +1,3 @@
+edit-line
+sh->curs->column = curs colum
+*********->line  = curs line

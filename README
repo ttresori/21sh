@@ -1,0 +1,6 @@
+edit-line
+sh->curs->column = curs colum
+*********->line  = curs line
+To DO:
+write at curs and moove the rest ;
+del a caractere ;
