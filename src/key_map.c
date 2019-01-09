@@ -12,8 +12,8 @@
 
 #include "../includes/lib_21.h"
 
-const long		input_tab[NB_INPUT] = {RIGHT_KEY};
-const t_ak		action_tab[NB_INPUT] = {moove_right};
+const long		input_tab[NB_INPUT] = {RIGHT_KEY, LEFT_KEY, CTRL_C};
+const t_ak		action_tab[NB_INPUT] = {moove_right, moove_left, leave_all};
 
 int		check_key(t_42sh *sh, long buf)
 {
@@ -24,8 +24,10 @@ int		check_key(t_42sh *sh, long buf)
 	{
 		if (input_tab[i] == buf)
 		{
-			action_tab[i](sh);
+				action_tab[i](sh);
+				return (1);
 		}
+			i++;
 	}
-	return (-1);
+	return (0);
 }

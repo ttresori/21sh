@@ -14,9 +14,6 @@
 
 void	free_all(t_42sh *sh)
 {
-	int i;
-
-	i = 0;
 //	free(&g_term);
 	free(sh);
 }

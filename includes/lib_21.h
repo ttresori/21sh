@@ -22,7 +22,7 @@
 # include <sys/stat.h>
 
 # define NB_INPUT_SELECT 7
-# define NB_INPUT 1
+# define NB_INPUT 3
 # define RIGHT_KEY 4414235
 # define LEFT_KEY 4479771
 # define HOME 4741915
@@ -43,10 +43,8 @@
 
 typedef struct		s_lst
 {
-	void			*content;
-	size_t			content_size;
+	char			c;
 	struct s_list	*next;
-	struct s_list	*prev;
 }					t_lst;
 
 typedef struct		s_env
@@ -54,6 +52,7 @@ typedef struct		s_env
 	char			**env;
 	size_t			size_env;
 }					t_env;
+
 typedef struct		s_term
 {
 	char			*name_term;
@@ -63,10 +62,18 @@ typedef struct		s_term
 
 t_term				g_term;
 
+typedef struct		s_curs
+{
+	int				line;
+	int				column;
+	int				start;
+}					t_curs;
+
 typedef struct		s_42sh
 {
 	t_env			*s_env;
 	t_list			*list;
+	t_curs			*curs;
 }					t_42sh;
 
 typedef				void(*t_ak)(t_42sh *sh);
@@ -86,10 +93,31 @@ void				free_all(t_42sh *sh);
 int					init_struct(t_42sh *sh, char ***env);
 
 /***************************************************************************** \
-|                              MOOVE                                           |
+|                              termcap_action                                           |
 \*****************************************************************************/
 
 void			moove_right(t_42sh *sh);
+void			moove_left(t_42sh *sh);
+int				my_outp(int c);
+
+/***************************************************************************** \
+|                              leave_all                                           |
+\*****************************************************************************/
+
+void			leave_all(t_42sh *sh);
+
+/***************************************************************************** \
+|                              utils                                           |
+\*****************************************************************************/
+
+void    print_prompt(t_42sh *sh);
+void  	check_for_curs(t_42sh *sh);
+
+/***************************************************************************** \
+|                              win_size                                           |
+\*****************************************************************************/
+
+int     check_win_size(t_42sh *sh);
 
 
 #endif
