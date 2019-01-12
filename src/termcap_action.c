@@ -88,19 +88,17 @@ void			conca_line(t_42sh *sh)
 	i = 0;
 	tmp = ft_strdup(sh->str);
 	len_str = ft_strlen(sh->str);
-	ft_putnbr(len_str);
 	free(sh->str);
 	if (!(sh->str = (char*)malloc(sizeof(char) * (len_str - 1))))
 		return ;
-	while (i < sh->curs->column)
+	while (i < (sh->curs->column - sh->curs->start))
 	{
 		sh->str[i] = tmp[i];
 		i++;
 	}
-	i++;
 	while (i < len_str)
 	{
-		sh->str[i - 1] = tmp[i];
+		sh->str[i] = tmp[i + 1];
 		i++;
 	}
 }
