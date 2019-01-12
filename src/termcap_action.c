@@ -78,3 +78,8 @@ void	moove_left(t_42sh *sh)
 				}
 		}
 }
+
+void		delete_one(t_42sh *sh)
+{
+	tputs(tgoto(tgetstr("dc", NULL), 1, 0), 1, my_outp);
+}

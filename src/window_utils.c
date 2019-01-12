@@ -1,6 +1,6 @@
 #include "../includes/lib_21.h"
 
-int     check_win_size(t_42sh *sh)
+int     check_win_size(void)
 {
     struct winsize w;
 

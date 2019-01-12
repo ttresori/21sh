@@ -14,7 +14,7 @@ NAME = 21sh
 
 SRCDIR = src
 SRC = main.c free.c init_struct.c key_map.c termcap_action.c leave_all.c \
-		utils.c window_utils.c
+		utils.c window_utils.c lexer.c
 
 OBJDIR = obj
 OBJ = $(SRC:.c=.o)
@@ -22,7 +22,7 @@ OBJ = $(SRC:.c=.o)
 LIBDIR = includes/libft
 LIB = ft
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -g3 -g
 
 all: $(LIBDIR)/lib$(LIB).a $(OBJDIR) $(NAME)
 

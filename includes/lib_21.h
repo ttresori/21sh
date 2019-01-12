@@ -22,7 +22,7 @@
 # include <sys/stat.h>
 
 # define NB_INPUT_SELECT 7
-# define NB_INPUT 3
+# define NB_INPUT 5
 # define RIGHT_KEY 4414235
 # define LEFT_KEY 4479771
 # define HOME 4741915
@@ -50,7 +50,6 @@ typedef struct		s_lst
 typedef struct		s_env
 {
 	char			**env;
-	size_t			size_env;
 }					t_env;
 
 typedef struct		s_term
@@ -74,6 +73,7 @@ typedef struct		s_42sh
 	t_env			*s_env;
 	t_list			*list;
 	t_curs			*curs;
+	t_term			*s_term;
 }					t_42sh;
 
 typedef				void(*t_ak)(t_42sh *sh);
@@ -91,6 +91,7 @@ void				free_all(t_42sh *sh);
 \*****************************************************************************/
 
 int					init_struct(t_42sh *sh, char ***env);
+void				restore_term(void);
 
 /***************************************************************************** \
 |                              termcap_action                                           |
@@ -99,6 +100,7 @@ int					init_struct(t_42sh *sh, char ***env);
 void			moove_right(t_42sh *sh);
 void			moove_left(t_42sh *sh);
 int				my_outp(int c);
+void			delete_one(t_42sh *sh);
 
 /***************************************************************************** \
 |                              leave_all                                           |
@@ -117,7 +119,19 @@ void  	check_for_curs(t_42sh *sh);
 |                              win_size                                           |
 \*****************************************************************************/
 
-int     check_win_size(t_42sh *sh);
+int     check_win_size(void);
 
+/***************************************************************************** \
+|                              lexer                                         |
+\*****************************************************************************/
+
+void	lexer(char *line, t_42sh *sh);
+
+/***************************************************************************** \
+|                              key_map                                         |
+\*****************************************************************************/
+
+
+void	new_blank_line();
 
 #endif

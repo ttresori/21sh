@@ -38,6 +38,7 @@ void	init_term()
 		exit(0);
 	g_term.term.c_lflag &= ~(ICANON);
 	g_term.term.c_lflag &= ~(ECHO);
+	g_term.term.c_lflag &= ~(ISIG);
 	g_term.term.c_cc[VMIN] = 1;
 	g_term.term.c_cc[VTIME] = 1;
 	ioctl(0, TIOCGWINSZ, &w);
@@ -45,7 +46,7 @@ void	init_term()
 		exit(0);
 }
 
-void	restore_term()
+void	restore_term(void)
 {
 	if (tcsetattr(0, 0, &g_term.reset))
 		return ;
@@ -53,11 +54,9 @@ void	restore_term()
 
 int		init_struct(t_42sh *sh, char ***env)
 {
-	t_term *s_term;
-
-	if (!(s_term = (t_term*)malloc(sizeof(t_term))))
+	if (!(sh->s_term = (t_term*)malloc(sizeof(t_term))))
 		return (-1);
-	g_term = *s_term;
+	g_term = *sh->s_term;
 	init_term();
 	sh->s_env = init_env(env);
 	return (0);

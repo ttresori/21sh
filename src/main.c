@@ -16,7 +16,6 @@ int		core(t_42sh *sh, char ***env)
 {
 	long	buf;
 	int		i;
-	char	c;
 	char	str[255];
 	char	*line;
 
@@ -36,16 +35,25 @@ int		core(t_42sh *sh, char ***env)
 			if (check_key(sh, buf) == 0)
 			{
 				str[i] = buf;
-				ft_putchar(str[i]);
-				i++;
-				check_for_curs(sh);
-				sh->curs->column++;
+				if (str[i] != '\n')
+				{
+					ft_putchar(str[i++]);
+					check_for_curs(sh);
+					sh->curs->column++;
+				}
+				else
+				{
+					ft_putchar('\n');
+					break ;
+				}
 			}
 		}
 		if (i > 0)
 		{
-			line = ft_strndup(str, i);
+			str[i] = '\0';
+			line = ft_strdup(str);
 			ft_putstr(line);
+			lexer(line, sh);
 			ft_bzero(str, ft_strlen(str));
 			free(line);
 		}
@@ -56,7 +64,6 @@ int		core(t_42sh *sh, char ***env)
 int		main(int argc, char **argv, char **env)
 {
 	t_42sh	*sh;
-	t_curs	*curs;
 
 	if (env[0] == NULL)
 	{
@@ -71,6 +78,8 @@ int		main(int argc, char **argv, char **env)
 		leave_all(sh);
 	else
 		leave_all(sh);
+	(void)argc;
+	(void)argv;
 	return (0);
 }
 
