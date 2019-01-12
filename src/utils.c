@@ -8,6 +8,7 @@ void    print_prompt(t_42sh *sh)
 	ft_putstr(getcwd(buf, 256));
 	ft_putstr("?> ");
     ft_putstr(NORMAL); 
+    sh->curs->column = 0;
     sh->curs->column = (ft_strlen(buf) + 4);
     sh->curs->line = 0;
     sh->curs->start = sh->curs->column;

@@ -70,6 +70,8 @@ typedef struct		s_curs
 
 typedef struct		s_42sh
 {
+	char			*input;
+	char			*str;
 	t_env			*s_env;
 	t_list			*list;
 	t_curs			*curs;

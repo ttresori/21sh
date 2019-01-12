@@ -16,8 +16,6 @@ int		core(t_42sh *sh, char ***env)
 {
 	long	buf;
 	int		i;
-	char	str[255];
-	char	*line;
 
 	buf = 0;
 	i = 0;
@@ -28,16 +26,19 @@ int		core(t_42sh *sh, char ***env)
 		print_prompt(sh);
 		buf = 0;
 		i = 0;
+		if (!(sh->str = (char*)malloc(sizeof(char) * 255)))
+			return (-1);
 		while (buf != '\n')
 		{
 			buf = 0;
 			read(STDOUT_FILENO, &buf, 4);
 			if (check_key(sh, buf) == 0)
 			{
-				str[i] = buf;
-				if (str[i] != '\n')
+				sh->str[i] = buf;
+				sh->str[i + 1] = '\0';
+				if (sh->str[i] != '\n')
 				{
-					ft_putchar(str[i++]);
+					ft_putchar(sh->str[i++]);
 					check_for_curs(sh);
 					sh->curs->column++;
 				}
@@ -50,12 +51,12 @@ int		core(t_42sh *sh, char ***env)
 		}
 		if (i > 0)
 		{
-			str[i] = '\0';
-			line = ft_strdup(str);
-			ft_putstr(line);
-			lexer(line, sh);
-			ft_bzero(str, ft_strlen(str));
-			free(line);
+			sh->str[i] = '\0';
+			sh->input = ft_strdup(sh->str);
+			ft_putstr(sh->input);
+			lexer(sh->input, sh);
+			free(sh->str);
+			free(sh->input);
 		}
 	}
 	return (0);

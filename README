@@ -3,4 +3,4 @@ sh->curs->column = curs colum
 *********->line  = curs line
 To DO:
 write at curs and moove the rest ;
-del a caractere ;
+del a caractere ; -> see [ modify directly sh->str for dup the correct line to sh->input

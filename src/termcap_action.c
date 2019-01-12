@@ -18,7 +18,7 @@ int		my_outp(int c)
 	return (0);
 }
 
-void	moove_right(t_42sh *sh)
+void			moove_right(t_42sh *sh)
 {
 	struct winsize w;
 
@@ -37,7 +37,7 @@ void	moove_right(t_42sh *sh)
 	}
 }
 
-void	go_last_col(t_42sh *sh)
+void			go_last_col(t_42sh *sh)
 {
 	struct winsize w;
 
@@ -50,7 +50,7 @@ void	go_last_col(t_42sh *sh)
 	}
 }
 
-void	moove_left(t_42sh *sh)
+void			moove_left(t_42sh *sh)
 {
 	if (sh->curs->line == 0)
 	{
@@ -79,7 +79,34 @@ void	moove_left(t_42sh *sh)
 		}
 }
 
-void		delete_one(t_42sh *sh)
+void			conca_line(t_42sh *sh)
+{
+	char		*tmp;
+	int			i;
+	int			len_str;
+
+	i = 0;
+	tmp = ft_strdup(sh->str);
+	len_str = ft_strlen(sh->str);
+	ft_putnbr(len_str);
+	free(sh->str);
+	if (!(sh->str = (char*)malloc(sizeof(char) * (len_str - 1))))
+		return ;
+	while (i < sh->curs->column)
+	{
+		sh->str[i] = tmp[i];
+		i++;
+	}
+	i++;
+	while (i < len_str)
+	{
+		sh->str[i - 1] = tmp[i];
+		i++;
+	}
+}
+
+void			delete_one(t_42sh *sh)
 {
 	tputs(tgoto(tgetstr("dc", NULL), 1, 0), 1, my_outp);
+	conca_line(sh);
 }
