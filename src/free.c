@@ -34,7 +34,9 @@ void	free_all(t_42sh *sh)
 {
 	free_env(sh);
 	free_term(sh);
-//	free_curs(sh);
+	free_curs(sh);
+	if (sh->str != NULL)
+		free(sh->str);
 	free(sh);
 	exit(0);
 }

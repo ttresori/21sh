@@ -65,9 +65,10 @@ typedef struct		s_curs
 {
 	int				line;
 	int				column;
+	int				nb_line;
 	int				start;
 }					t_curs;
-
+	
 typedef struct		s_42sh
 {
 	char			*input;

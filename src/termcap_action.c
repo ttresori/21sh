@@ -23,6 +23,15 @@ void			moove_right(t_42sh *sh)
 	struct winsize w;
 
     ioctl(0, TIOCGWINSZ, &w);
+	if (sh->curs->line == 0)
+	{
+		if (sh->curs->column == ((int)ft_strlen(sh->str) + sh->curs->start))
+			return ;
+	}
+	else
+	{
+		ft_putnbr(((w.ws_col * (sh->curs->line + 1)) - (ft_strlen(sh->str)) + sh->curs->start) - w.ws_row);
+	}
 	if (sh->curs->column < w.ws_col)
 	{
 		tputs(tgoto(tgetstr("nd", NULL), 1, 0), 1, my_outp);

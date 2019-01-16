@@ -28,6 +28,7 @@ int		core(t_42sh *sh, char ***env)
 		i = 0;
 		if (!(sh->str = (char*)malloc(sizeof(char) * 255)))
 			return (-1);
+		sh->str[0] = '\0';
 		while (buf != '\n')
 		{
 			buf = 0;
